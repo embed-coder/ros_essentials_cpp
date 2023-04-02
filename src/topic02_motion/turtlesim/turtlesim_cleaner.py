@@ -185,11 +185,16 @@ if __name__ == '__main__':
         pose_subscriber = rospy.Subscriber(position_topic, Pose, poseCallback)
         time.sleep(2)
 
+        x_goal = rospy.get_param("x_goal")
+        y_goal = rospy.get_param("y_goal")
+        print("x_goal: {}, y_goal: {}".format(x_goal, y_goal))
+        go_to_goal(velocity_publisher, x_goal, y_goal)
+
         # move(velocity_publisher, 1.0, 9.0, True)
         # rotate(velocity_publisher, 30, 90, True)
         # go_to_goal(velocity_publisher, 2.0, 1.5)
         # setDesiredOrientation(velocity_publisher, 30, 90)
         # spiralClean(velocity_publisher, 4, 0)
-        gridClean(velocity_publisher)
+        # gridClean(velocity_publisher)
     except rospy.ROSInterruptException:
         rospy.loginfo("node terminated.")
